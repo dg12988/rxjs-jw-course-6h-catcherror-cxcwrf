@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 const failingHttpRequest$ = new Observable(subscriber => {
@@ -9,8 +9,6 @@ const failingHttpRequest$ = new Observable(subscriber => {
 
 console.log('App Started');
 
-failingHttpRequest$.pipe(
-  catchError(error => of('Fallback value'))
-).subscribe(
-  value => console.log(value)
-);
+failingHttpRequest$
+  .pipe(catchError(error => of('Fallback value')))
+  .subscribe(value => console.log(value));
